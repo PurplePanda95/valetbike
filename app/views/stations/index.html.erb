@@ -1,44 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.item1 { grid-area: aboutus; }
+.item2 { grid-area: signup; }
+.item3 { grid-area: login; }
+.item4 { grid-area: membership; }
+.item5 { grid-area: help; }
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        'aboutus login signup membership help';
+    gap: 5px;
+    background-color: #90EE90;
+    padding: 5px;
+}
+
+.grid-container > div {
+    background-color: #32CD32;
+    text-align: center;
+    border: 2px solid rgba(0,0,0,0.8);
+    padding: 10px;
+    font-size: 20px;
+}
+
+.grid-containertwo {
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+  grid-template-rows: auto auto;
+  grid-gap: 5px;
+}
+
+.item6 {
+  grid-column: 3 / 4;
+  grid-row: 1;
+  text-align: center;
+  background-color: #32CD32;
+}
+
+.grid-containerthree {
+  display: grid;
+  grid-template-columns: repeat(6, 200px);
+  grid-gap: 12px;
+  padding: 15px;
+}
+
+.bottomitems {
+  font-size: 20px;
+  padding: 5px;
+  text-align: center;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px;
+  text-align: center;
+}
+.row: after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.left {
+  font-size: 15px;
+}
+.right {
+  border: 3px solid green;
+  font-size: 20px;
+}
+</style>
+</head>
+
+<body>
 <div class="page-section flexbox vertical stretch">
   <div class="section-inner flexbox vertical stretch">
-    <div class="section-title">
-      Hello and Welcome to ValetBike!<br>
-      Available stations:
+    <div class="section-title flexbox vertical center">
+      <font color="#228B22"> Welcome to ValetBike! </font>
     </div>  
-    <div class="flexbox vertical stretch">
+	</div>
+  
+  <div class="grid-container">
+    <div class="item1">About Us!</div>
+    <div class="item2">Sign Up</div>
+    <div class="item3">Log In</div>
+    <div class="item4">Membership</div>
+    <div class="item5">Help</div>
+  </div>
+
+
+  <div class="row">
+    <div class="column left">
+      <img src="https://images.unsplash.com/photo-1463663044706-e442cdfeeb7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" alt="">
+    </div>
+    
+    <div class="column right">
       <% if @stations.present? %>
         <%= render(partial: "stations/row", collection: @stations, as: :station) %>
       <% else %>
-      <div class="empty">
-        No stations found.
-      </div>
+        No stations are currently available.<br>
+        Come back later!
       <% end %>
     </div>
-	</div>
-</div>
-<div class="stations index">
-  <h2>Stations</h2>
-
-  <%= link_to("Add New Station", new_station_path, class: 'action new') %>
-
-  <table class="listing" summary="Station list" style="width: 100%;">
-    <tr class="header">
-      <th>#</th>
-      <th>Station Name</th>
-      <th>Address</th>
-      <th>Actions</th>
-    </tr>
-    <% @stations.each do |station| %>
-    <tr>
-      <td><%= station.identifier %></td>
-      <td><%= station.name %></td>
-      <td><%= station.address %></td>
-      <td class="actions">
-        <%= link_to("Show", station_path(station), class: 'action show') %>
-        <%= link_to("Edit", edit_station_path(station), class: 'action edit') %>
-        <%= link_to("Delete", delete_station_path(station), class: 'action delete') %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+  </div>
 </div>
 
+<div class="grid-containertwo">
+  <div class="item6">
+    <%= link_to('Add New Stations', new_station_path) %>
+  </div>
+</div>
+
+<div class="grid-containerthree">
+  <div class="bottomitems"></div>
+  <div class="bottomitems"></div>
+  <div class="bottomitems"></div>
+  <div class="bottomitems" style="border: 2px solid #444; 
+                                  background-color: Yellow">Terms of Use</div>
+  <div class="bottomitems" style="border: 2px solid #444; 
+                                  background-color: Yellow">User Agreement</div>         
+  <div class="bottomitems" style="border: 2px solid #444; 
+                                  background-color: Yellow">Privacy Policy</div>                       
+  </div>
+</div>
+
+</body>
+</html>
