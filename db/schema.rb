@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_27_001753) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
+
   create_table "memberships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "identifier"
     t.string "name"
@@ -61,6 +61,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_27_001753) do
     t.integer "identifier"
     t.string "name"
     t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "membership_id"
+    t.string "email_address"
+    t.string "phone_number"
+    t.integer "user_id"
+    t.boolean "is_admin"
+    t.integer "card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
