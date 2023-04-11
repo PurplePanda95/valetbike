@@ -37,8 +37,8 @@ h1{
     font-size: 62px;
 }
 
-body{
-    min-height: 100vh;
+body {
+  min-height: 100vh;
 }
 .item1 { grid-area: aboutus; }
 .item2 { grid-area: signup; }
@@ -103,6 +103,12 @@ body{
   padding: 10px;
   height: 300px;
   text-align: center;
+}
+
+
+.watermark {
+  opacity: 1;
+  color: BLACK;
 }
 
 /*.row: after {
