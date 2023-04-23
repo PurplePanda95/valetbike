@@ -1,0 +1,23 @@
+<h1>Return a Bike</h1>
+
+<%= form_tag return_rental_path, method: :get do %>
+  <p>
+    <label for="station_id">Enter Bike ID:</label>
+    <%= text_field_tag :station_id %>
+  </p>
+
+  <p>
+    <label for="station_name">Enter Station Name:</label>
+    <%= text_field_tag :station_name %>
+  </p>
+
+  <p>
+    <label for="station_select">Select Station:</label>
+    <%= select_tag :station_id, options_from_collection_for_select(Station.all, :id, :name) %>
+  </p>
+
+  <div class="actions">
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
