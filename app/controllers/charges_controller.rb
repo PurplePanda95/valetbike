@@ -1,4 +1,6 @@
 class ChargesController < ApplicationController
+  # potentially switch from payment to membership class, and from card to credit card
+  
   before_action :authenticate_user!
 
   def new
