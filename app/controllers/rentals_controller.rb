@@ -24,7 +24,24 @@ class RentalsController < ApplicationController
     end
   end
   
-  def return
+  def bike_return
+    #@stations = Station.all
+    #if params[:submit_id].present?
+      #station = Station.find_by(id: params[:identifier])
+    #elsif params[:submit_name].present?
+      #station = Station.find_by("name LIKE ?", "%#{params[:name]}%")
+    #end
+    if station.present?
+      current_station_id = params[:current_station_id] 
+      @rental = current_user.rentals.order(created_at: :desc).first
+      @rental.update(end_time: Time.now)
+      bike = @rental.bike
+      station = Station.find_by(identifier: current_station_id)
+      bike.update(current_station: station) 
+      @rental.update(distance: 20)
+      flash[:return_success] = "Bike returned successfully!"
+      redirect_to station_path(station)
+    end
   end
 
   def index
@@ -40,3 +57,6 @@ class RentalsController < ApplicationController
   end
 
 end
+
+
+

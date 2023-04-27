@@ -1,4 +1,15 @@
-<div>
-  <h1 class="font-bold text-4xl">Rental#return</h1>
-  <p>Find me in app/views/rental/return.html.erb</p>
-</div>
+<h1>Return a Bike</h1>
+
+<%= form_tag url_for(controller: 'rentals', action: 'bike_return'), method: :post do %>
+  <%= label_tag :identifier, "Enter ID" %>
+  <%= text_field_tag :identifier %>
+  <%= submit_tag "Submit ID", name: "submit_id" %>
+
+  <%= label_tag :name, "Enter Station Name" %>
+  <%= text_field_tag :name %>
+  <%= submit_tag "Submit Name", name: "submit_name" %>
+
+  <%= label_tag :name, "Select Station" %>
+  <%= select_tag :name, options_from_collection_for_select(@stations, :name) %>
+  <%= submit_tag "Submit Station", name: "submit_station" %>
+<% end %>

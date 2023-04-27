@@ -11,8 +11,8 @@ class RentalsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get return" do
-    get rental_return_url
+  test "should get bike_return" do
+    get rental_bike_return_url
     assert_response :success
   end
 

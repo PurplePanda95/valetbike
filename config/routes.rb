@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   # get 'rental/show'
   # get 'rental/new'
-  # get 'rental/return'
+  # get 'rental/bike_return'
   # get 'rental/index'
   # get 'rental/confirm'
+  post 'rentals/bike_return', to: 'rentals#bike_return', as: 'bike_return'
   resources :rentals
   get 'cards/index'
   get 'cards/show'
