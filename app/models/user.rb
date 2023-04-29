@@ -48,7 +48,9 @@ class User < ApplicationRecord
     def get_membership
         @membership_assignments
     end
-
+    def get_ongoing_rental
+        rentals.order(created_at: :desc).first
+    end
     def ongoing_rental?
         rentals.order(created_at: :desc).present? && rentals.order(created_at: :desc).first.is_ongoing?
     end

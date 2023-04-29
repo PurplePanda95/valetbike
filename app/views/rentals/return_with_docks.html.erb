@@ -1,0 +1,11 @@
+<h1>Select a dock at <%=@station%> to return a bike</h1>
+  <table>
+    <tr>
+      <% @station.get_num_docks.times do |i| %>
+        <th> <%=i + 1%> </th>
+      <% end %>
+    </tr>
+    <tr>
+      <%= render(partial: "rentals/return_dock", collection: @station.docks_with_bikes, as: :bike) %>
+    </tr>
+  </table>

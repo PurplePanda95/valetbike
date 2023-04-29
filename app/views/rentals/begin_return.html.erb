@@ -1,0 +1,27 @@
+<div>
+  <h1 class="font-bold text-4xl">Rental#return</h1>
+  <p>Find me in app/views/rental/return.html.erb</p>
+</div>
+<h1>Return a Bike</h1>
+<% if @station %>
+<% puts "why not load" %>
+<% puts @station %>
+  <table>
+    <tr>
+      <% @station.get_num_docks.times do |i| %>
+        <th> <%=i + 1%> </th>
+      <% end %>
+    </tr>
+    <tr>
+      <%= render(partial: "rentals/return_dock", collection: @station.docks_with_bikes, as: :bike) %>
+    </tr>
+  </table>
+<% else %>
+<%= form_with(url: rentals_return_path, method: "patch") do |form| %>
+  <%= label_tag :id, "Select Station" %>
+  <%= select_tag :id, options_from_collection_for_select(@stations, "id", "name") %>
+  <%= submit_tag "Return bike", name: "submit" %>
+  <%= submit_tag "Return bike at dock", name: "submit_station" %>
+<% end %>
+<% end %>
+

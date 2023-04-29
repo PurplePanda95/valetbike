@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # get 'rental/show'
   # get 'rental/new'
   patch 'rentals/return'
+  get 'rentals/begin_return'
   # get 'rental/index'
   # get 'rental/confirm'
   resources :rentals
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
   end
   get 'users/index'
   get 'account', to: 'users#show', as: 'account'
-  
+  get 'rentals/return_at_dock', to: 'rentals#return_with_docks', as: 'rentals_return_at_dock'
 
   root to: "pages#home"
 

@@ -12,7 +12,7 @@ class Bike < ApplicationRecord
 
   # belongs_to: user, class_name: :User, foreign_key: :user_id, optional: true
 
-  before_update :set_default_dock, if: Proc.new {|t| t.current_station && (t.dock_id.blank? || t.dock_id < 1) }
+  before_validation :set_default_dock, if: Proc.new {|t| t.current_station && (t.dock_id.blank? || t.dock_id < 1) }
   validate :validate_dock, if: Proc.new {|t| t.current_station }
   validate :validate_station
 
@@ -38,10 +38,9 @@ class Bike < ApplicationRecord
       get_dock()
     end
   end
-
-  # def current_station_id=(new_station_id)
-  #   @current_station_id = new
-  # end
+  def assign_dock
+    current_station.available_docks.first
+  end
 
   private
     def set_default_dock
@@ -71,7 +70,5 @@ class Bike < ApplicationRecord
       end
     end
     
-    def assign_dock
-      current_station.available_docks.first
-    end
+    
 end
