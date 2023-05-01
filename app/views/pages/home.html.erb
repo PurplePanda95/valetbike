@@ -1,11 +1,15 @@
+
+
+
 <div class = "hero-image">
 </div>
 <div class ="page-section">
-
+<% if user_signed_in? %>
 <form action="/customer_portal_sessions" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <button>Manage Billing</button>
 </form>
+<% end %>
 
 
 <% if user_signed_in? && current_user.is_admin? %>
@@ -22,7 +26,13 @@
 <% end %>
         <div class="row">
             <div class="column left">
+                <div class="grid-containerFour">
+                    <div class="logoo">
+                    </div>
+                </div>
             </div>
+
             <div class="column right">
+                <h1>Welcome!</h1>
             </div>
         </div>
