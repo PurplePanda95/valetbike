@@ -1,5 +1,6 @@
 <style>
 h2 {text-align: center;}
+h3 {text-align: left; }
 </style>
 
 <div class = "hero-image">
@@ -28,8 +29,37 @@ h2 {text-align: center;}
 
 <h1>Happy <span id="day"></span>!</h1>
 <h2>Enjoy your <span id="hour"></span> with <em>Valetbike!</em></h2>
-<br></br>
+<br>  </br>
 <h2> <%= link_to "Get Started", new_user_registration_path %> </h2> 
+
+<div class="row">
+<div class="column left">
+
+
+<img src="https://i.postimg.cc/SRTnDMJy/bike.jpg"
+width="600px"
+height="320px"
+onclick="enlargeImg()" id="img1">
+
+<h3>Fun fact:</h3>
+<h3>Hint: Click on me and observe my WHEELS!!! </h3>
+<div style="line-height: 0.25em;">&nbsp;</div>
+<h2>;)</h2>
+<button onclick="resetImg()">Reset</button>
+</div>
+
+
+<div class="column right">
+</div>
+</div>
+
+
+
+
+
+
+
+
 
 <script>
 const period =
