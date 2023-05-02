@@ -1,8 +1,7 @@
 
 
-
 <div class = "hero-image">
-</div>
+</div> 
 <div class ="page-section">
 <% if user_signed_in? %>
 <form action="/customer_portal_sessions" method="POST">
@@ -26,13 +25,26 @@
 <% end %>
         <div class="row">
             <div class="column left">
-                <div class="grid-containerFour">
-                    <div class="logoo">
-                    </div>
-                </div>
+            <div class="grid-containerFour">
+            <div class="logoo">
+            </div>
+            </div>
             </div>
 
             <div class="column right">
-                <h1>Welcome!</h1>
+            <% if id="time" < '12' %>
+                <h1>Good Morning!</h1>
+            <% elsif id="time" >= '12' &&  id="time" < '18' %>
+                <h1>Good Afternoon!</h1>
+            <% elsif id="time" >= '18' %>
+                <h1>Good Evening!</h1>
+            <% end %>
             </div>
         </div>
+
+
+<script>
+const d = new Date();
+let hour = d.getHours();
+document.getElementById("time").innerHTML = hour;
+</script>
