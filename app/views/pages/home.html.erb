@@ -1,4 +1,6 @@
-
+<style>
+h2 {text-align: center;}
+</style>
 
 <div class = "hero-image">
 </div> 
@@ -23,28 +25,45 @@
                 </ul>
             </div>  
 <% end %>
-        <div class="row">
-            <div class="column left">
-            <div class="grid-containerFour">
-            <div class="logoo">
-            </div>
-            </div>
-            </div>
 
-            <div class="column right">
-            <% if id="time" < '12' %>
-                <h1>Good Morning!</h1>
-            <% elsif id="time" >= '12' &&  id="time" < '18' %>
-                <h1>Good Afternoon!</h1>
-            <% elsif id="time" >= '18' %>
-                <h1>Good Evening!</h1>
-            <% end %>
-            </div>
-        </div>
-
+<h1>Happy <span id="day"></span>!</h1>
+<h2>Enjoy your <span id="hour"></span> with <em>Valetbike!</em></h2>
+<br></br>
+<h2> <%= link_to "Get Started", new_user_registration_path %> </h2> 
 
 <script>
+const period =
+["wonderful morning", "wonderful afternoon", "wonderful evening"];
+
+function time(i) {
+    if ( i < 12 ) { i = 0; }
+    if ( i >= 12 && i < 18 ) { i = 1; }
+    if ( i >= 12 ) { i = 2; }
+    return i
+}
 const d = new Date();
-let hour = d.getHours();
-document.getElementById("time").innerHTML = hour;
+let whatperiod = time(d.getHours());
+let hour = period[whatperiod];
+document.getElementById("hour").innerHTML = hour;
+</script>
+
+<script>
+const weekday =
+["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const d2 = new Date();
+let day = weekday[d2.getDay()];
+document.getElementById("day").innerHTML = day;
+</script>
+
+<script>
+img = document.getElementById("img1");
+function enlargeImg() {
+    img.style.transform = "scale(1.5)";
+    img.style.transition = "transform 0.25s ease";
+}
+
+function resetImg() {
+    img.style.transform = "scale(1)";
+    img.style.transition = "transform 0.25s ease";
+}
 </script>
