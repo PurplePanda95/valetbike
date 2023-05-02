@@ -14,29 +14,36 @@ class MembershipAssignmentController < ApplicationController
       def create
         @membershipassignment = MembershipAssignment.new(membershipassignment_params)
         if @membershipassignment.save
-          membership = Membership.find(@membershipassignment.membership_id)
-          redirect_to(user_path)
-          #redirect_to(pages_success_path)
+          #membership = Membership.find(@membershipassignment.membership_id)
+          #puts membership_assignment_confirm_path(:membership_assignment_id => @membershipassignment)
+          #redirect_to(checkouts_create_path, params: {:id => @membershipassignment.id, :type => 0}, remote: true, action: :post)
         else
-          @membershipassignment.get_membership
           render('new')
         end
       end
       
-      def return
+      def update
+        @membershipassignment = MembershipAssignment.find(params[:id])
+        if @membershipassignment.update(membershipassignment_update_params)
+          redirect_to(add_membership_path)
+        else
+          render('cancel')
+        end
       end
-    
-      def index
+      def cancel
+        @membershipassignment = MembershipAssignment.find(params[:id])
       end
-    
       def confirm
+        @membership_assignment = MembershipAssignment.find(params[:membership_assignment_id])
       end
     
       private 
     
       def membershipassignment_params 
-        params.require(:membershipassignment, :user_id, :membership_id)
+        params.require(:membership_assignment).permit(:user_id, :membership_id)
       end
-    
+      def membershipassignment_update_params
+        params.require(:membership_assignment).permit(:end)
+      end
     end
     

@@ -1,11 +1,8 @@
 <div>
   <h1 class="font-bold text-4xl">Available Memberships</h1>
-  <% @memberships.each do |membership| %>
-    <%= membership.id %>
-  <% end %>
    <div class="flexbox vertical stretch">
       <% if @memberships.present? %>
-        <%= render(partial: "membership/row", collection: @memberships, as: :membership) %>
+        <%= render(partial: "shared/membership_new_row", collection: @memberships, as: :membership) %>
       <% else %>
       <div class="empty">
         No memberships available.

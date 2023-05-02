@@ -1,0 +1,13 @@
+<div class="record-row <%= cycle "odd", "even", name: "row-cycler" %> flexbox vertical stretch">
+<strong><%= membership.name %></strong>
+
+<% if membership.description.present? %>
+<%= membership.description %><br>
+<% else %>
+  <%= membership.cost %>$ for <%= membership.payment_frequency %> <%= membership.time_unit %><br>
+  <% end %>
+  Cost: <%= membership.cost %>$<br>
+  <% if user_signed_in? %>
+  <%= button_to "Add Membership", checkouts_create_path, params: {:id => membership.id, :type => 0}, remote: true %>
+  <% end %>
+</div>

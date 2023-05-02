@@ -1,4 +1,23 @@
-<div>
-  <h1 class="font-bold text-4xl">Rental#show</h1>
-  <p>Find me in app/views/rental/show.html.erb</p>
-</div>
+<div class="stations show">
+<div class="page-section flexbox vertical stretch">
+  <div class="section-inner flexbox vertical stretch">
+    <div class="section-title">
+    <% if !current_user.ongoing_rental? %>
+      You do not have an ongoing rental.
+    <% else %>
+      Renting bike <%= @rental.bike.identifier %>
+    <% end %>
+    <% if current_user.ongoing_rental? %>
+        This rental started at <%= @rental.start_time.localtime.strftime("%I:%M %P ") %> 
+        <% if @rental.start_time.today? %> 
+        today.
+        <% else %>
+        on <%= @rental.start_time.strftime("%B %-d, %Y") %>.
+        <% end %>
+        <br>
+        You will be charged 50 cents for every minute after <%= (Time.now + @rental.time_limit.minute).strftime("%I:%M %P ") %><br>
+        Return your rental
+    <% end %>
+    </div>
+	</div>
+  </div>

@@ -13,7 +13,6 @@ class StationsController < ApplicationController
   end
   def create
     @station = Station.new(station_params)
-    
     if @station.save
       redirect_to(stations_path)
     else
@@ -46,6 +45,6 @@ class StationsController < ApplicationController
   private
   
   def station_params
-    params.require(:station).permit(:name, :address, :identifier)
+    params.require(:station).permit(:name, :address, :identifier, :num_docks)
   end
 end

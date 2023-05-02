@@ -1,7 +1,12 @@
-<%#this would be to view SPECIFIC PROFILE INFORMATION ie settings%>
-<h1> Hi <%=current_user.name %>  Profile</h1>
-<p> Registration Date: <%=current_user.timestamps %> </p>
-<p> Mobile Number </p>
-<p> Email </p>
-<button type="button">Edit Profile *BROKEN* </button>
-<button type="button"><%= link_to "Back", users_index_path %></button>
+<%# This is the user's profile page %>
+<div>
+  <h1>Hi, <%=current_user.full_name %> </h1>
+  <p> Registration Date: <%=current_user.created_at %> </p>
+  <p> Email: <%= current_user.email %></p>
+  <h3> Your Membership Status: <%=current_user.get_membership.name%> </h3>
+  <button type="button"><%= link_to "Membership Plans", membership_assignment_new_path %></button>
+</div>
+<% if current_user.overdues.present? %>
+  You need to pay for the extra <%= current_user.overdues.first.time_over %> minutes you spent on your bike before you can rent again. Pay below. 
+  <%= button_to "Pay overtime fee", checkouts_create_path, params: {:id => current_user.overdues.first.id, :type => 2}, remote: true %>
+<% end %>

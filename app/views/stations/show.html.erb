@@ -10,7 +10,7 @@
     <%= link_to('Edit', edit_station_path(@station)) %>
     <%= link_to('Delete', delete_station_path(@station)) %> <br>
     <% end %>
-      <% if @station.docked_bikes.present? %>
+      <% if @station.docked_bikes.present? || (user_signed_in? && current_user.ongoing_rental?)%>
         Available bikes docked:
         <table>
           <tr>

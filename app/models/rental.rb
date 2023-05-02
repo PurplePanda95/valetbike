@@ -2,7 +2,6 @@ class Rental < ApplicationRecord
     
     belongs_to :bike, class_name: :Bike, foreign_key: :bike_id, optional: false
     belongs_to :renter, class_name: :User, foreign_key: :renter_id, optional: false
-    has_one :payment, class_name: :Payment, foreign_key: :rental_id
     #, #optional: false
     before_create :add_starting_values
 
@@ -23,15 +22,24 @@ class Rental < ApplicationRecord
     end
     def getTimeElapsed
         if self.is_done? 
-            return end_time - start_time
+            return (end_time - start_time)/60.ceil
         end
-        Time.now - start_time
+        round(Time.now - start_time)
     end
     def getAverageSpeed
         if self.is_ongoing? || !distance
             return nil
         end
         return distance / self.getTimeElapsed
+    end
+    def is_overdue?
+        self.getTimeElapsed > time_limit
+    end
+    def minutes_over
+        unless is_overdue?
+            return 0
+        end
+        self.getTimeElapsed - time_limit
     end
     private
     def add_starting_values

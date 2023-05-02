@@ -1,6 +1,0 @@
-<div class="record-row <%= cycle "odd", "even", name: "row-cycler" %> flexbox vertical stretch">
-  <strong><%= membership.name %></strong>: <%= membership.cost %>$ every <%= membership.payment_frequency %> <%= membership.time_unit %><br>
-  <% if user_signed_in? %>
-  <%= link_to("Join!", membership_path(membership), class: 'action show') %>
-  <% end %>
-</div>

@@ -1,6 +1,6 @@
 <div class="record-row <%= cycle "odd", "even", name: "row-cycler" %> flexbox vertical stretch">
   <%= station.identifier %>: <%= station.name %> (<%= station.address %>) [<%= station.get_num_bikes %> available bikes, <%= station.get_available_docks %> available docks]
   <% if user_signed_in?%>
-  <%= link_to("Rent", station_path(station), class: 'action show') %>
+  <%= link_to("Return", station_path(station), class: 'action show') %>
   <% end %>
 </div>

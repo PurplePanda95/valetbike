@@ -1,15 +1,36 @@
-<h2>Log in</h2>
+<style>
+  .container4 {
+    height: 3.5em;
+  }
+
+  .field input[type="email"], 
+  .field input[type="password"] {
+    padding-left: 10px; 
+  }
+
+  .field label.required:after {
+    content: " *";
+    color: red;
+  }
+</style>
+
+<div class="container4">
+</div>
+
+<h2>Log in</h2><br>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+    <%= f.label :email, "Email", class: "required" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, maxlength: 25, style: "height: 30px; border: 0.5px solid #808080; border-radius: 5px;" %>
   </div>
+  <div style="line-height: 1em;">&nbsp;</div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password", required: true %>
+    <%= f.label :password, "Password", class: "required" %><br />
+    <%= f.password_field :password, autocomplete: "current-password", required: true, maxlength: 25, style: "height: 30px; border: 0.5px solid #808080; border-radius: 5px;" %>
   </div>
+  <div style="line-height: 0.5em;">&nbsp;</div>
 
   <% if devise_mapping.rememberable? %>
     <div class="field">
@@ -17,10 +38,13 @@
       <%= f.label :remember_me %>
     </div>
   <% end %>
+  <br>
+  <div style="line-height: 0.5em;">&nbsp;</div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="actions" style="text-align: center;">
+    <%= f.submit "Log in", style: "width: 200px; height: 40px; background: #32CD32; color: #FFFFFF; border: solid #32CD32; cursor: pointer; border-radius: 5px; font-weight: 549;" %>
   </div>
+  <br>
 <% end %>
 
 <%= render "devise/shared/links" %>
