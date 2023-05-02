@@ -14,9 +14,6 @@
     from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
   }
 
-
-
-  
 .grid-containerFour {
   display: grid;
   grid-template-columns: auto auto;
@@ -32,4 +29,9 @@
   height: 450px;
   background-image: url("ValetBikeLogo.png");
   background-size: 600px 450px;;
+  }
+.welcome {
+  position: absolute;
+  bottom: 135px;
+  right: 0%
 }

@@ -7,6 +7,7 @@ class Membership < ApplicationRecord
                             :name,
                             :position,
                             :cost
+    has_many :membership_assignments
     before_validation :set_default_position,
         if: Proc.new {|t| t.position.blank? || t.position < 0 }
     

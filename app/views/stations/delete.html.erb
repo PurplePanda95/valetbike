@@ -1,4 +1,15 @@
-<div>
-  <h1 class="font-bold text-4xl">Station#delete</h1>
-  <p>Find me in app/views/station/delete.html.erb</p>
+<%= link_to("Back to List", stations_path, class: 'back-link') %>
+
+<div class="stations delete">
+  <h2>Delete Station</h2>
+
+  <%= form_for(@station, method: 'delete') do |f| %>
+    <p>Are you sure you want to permanently delete this station?</p>
+    <p><%= @station.name %></p>
+
+    <div class="form-buttons">
+      <%= f.submit("Delete Station") %>
+    </div>
+
+  <% end %>
 </div>

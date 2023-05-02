@@ -5,7 +5,7 @@ class Station < ApplicationRecord
                            :num_docks
   validates_uniqueness_of  :identifier
   
-  validates_inclusion_of :has_kiosk, :in => [true, false]
+  # validates_inclusion_of :has_kiosk, :in => [true, false]
   has_many :docked_bikes, class_name: :Bike, foreign_key: :current_station_id
   def getAddress 
     address
@@ -45,7 +45,8 @@ class Station < ApplicationRecord
   end
 
   def docks_with_bikes
-    all_docks = Array.new(num_docks)
+    #all_docks = Array.new(num_docks)
+    all_docks = [*1..num_docks]
     docked_bikes.order(dock_id: :asc).each do |bike|
       all_docks[bike.dock_id - 1] = bike
     end

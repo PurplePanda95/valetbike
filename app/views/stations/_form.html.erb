@@ -1,7 +1,7 @@
 <%# error_messages_for(f.object) %>
 <% # copied from the linkedin learning task_manager %>
 
-<table summary="Task form fields">
+<table summary="Station form fields">
   <tr>
     <th>Name</th>
     <td><%= f.text_field(:name) %></td>
@@ -13,5 +13,9 @@
   <tr>
     <th>Identifier</th>
     <td><%= f.text_field(:identifier) %></td>
+  </tr>
+  <tr>
+    <th>Number of Docks</th>
+    <td><%= f.text_field(:num_docks) %></td>
   </tr>
 </table>

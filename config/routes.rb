@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # get 'rental/show'
   # get 'rental/new'
-  # get 'rental/return'
+  patch 'rentals/return'
   # get 'rental/index'
   # get 'rental/confirm'
   resources :rentals
@@ -15,23 +15,9 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     confirmations: 'users/confirmations',
     unlocks: 'users/unlocks'
-  }
-  resources :billing_infos
-  #get 'billing_infos/new'
-  #get 'billing_infos/create'
-  devise_for :logins, controllers: {
-    sessions: 'logins/sessions',
-    registrations: 'logins/registrations',
-    passwords: 'logins/passwords',
-    confirmations: 'logins/confirmations',
-
-  }
-  
+  }  
   get 'membership/index'
   get 'membership/show'
-  get 'membership/new'
-  get 'membership/edit'
-  get 'membership/delete'
 
   get 'pages/about'
   get 'pages/contact'
@@ -39,36 +25,37 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'pages/privacypol'
   get 'pages/terms'
-  get 'pages/userag'
-  get 'pages/rental'
-  get 'pages/success'
-  get 'pages/paymentdemo'
 
   get 'membership_assignment/index'
   get 'membership_assignment/new'
+  patch 'membership_assignment/update'
 
   resources :stations do
     member do
       get :delete
     end
   end
-  # get 'stations/index'
-  # get 'stations/show'
-  # get 'stations/new'
-  # get 'stations/edit'
-  # get 'stations/delete'
 
   resources :users do
   end
   get 'users/index'
-  get 'users/show'
-  
-
+  get 'account', to: 'users#show', as: 'account'
+  get 'remove_overdue', to: 'users#remove_overdue', as: 'remove_overdue'
+  get 'user/add_membership', to: 'membership_assignment#new', as: 'add_membership'
+  get 'user/cancel_membership', to: 'membership_assignment#cancel', as: 'cancel_membership'
   root to: "pages#home"
 
   resources :charges
-  resources :customer_portal_sessions, only: [:create]
   resources :membership
+  resources :membership_assignment
 
-  get 'thanks', to: 'charges#thanks', as: 'thanks'
+  default_url_options :host => "127.0.0.1:3000"
+
+  post 'checkouts/create' => 'checkouts#create', as: "checkouts_create"
+  get 'checkouts/pay' => 'checkouts#pay', as: "checkouts_pay"
+  post 'membership_assignment/create' => 'membership_assignment#create', as: "membership_assignment_create"
+  
+  get 'membership_assignments/confirm' => 'membership_assignment#confirm', as: "membership_assignment_confirm"
+  get 'membership_assignment/show' => 'membership_assignment#show', as: "membership_assignment_show"
+  
 end

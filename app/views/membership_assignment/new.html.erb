@@ -1,2 +1,8 @@
+
 <h1> Select Your Membership Plan:</h1>
-<%= render(partial: "membership_assignment/row", collection: @memberships, as: :membership) %>
+<% if user_signed_in? && current_user.has_active_membership? %>
+<%= button_to("Cancel existing membership", cancel_membership_path, params: {:id => current_user.get_membership_assignment.id}, method: :get) %>
+<% end %>
+ <div class="flexbox vertical stretch">
+<%= render(partial: "shared/membership_new_row", collection: @memberships, as: :membership) %>
+</div>

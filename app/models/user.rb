@@ -15,17 +15,12 @@ class User < ApplicationRecord
                       length: { maximum: 50 },
                       uniqueness: true,
                       confirmation: true
-    #validates :membership_id, presence: true
-    #validates :user_id, presence: true
-    #validates :card_id, presence: true
     validate :validate_optional_phone_number
 
     has_many :rentals, class_name: :Rental, foreign_key: :renter_id
-    has_many :payments, class_name: :Payment, foreign_key: :user_id
     has_many :membership_assignments, class_name: :MembershipAssignment, foreign_key: :user_id
     has_many :memberships, through: :membership_assignments
-    has_many :cards, dependent: :destroy #new
-
+    has_many :overdues
     def get_name
     end
 
@@ -42,13 +37,24 @@ class User < ApplicationRecord
         is_admin
     end
 
-    def has_payment_info
-    end
-
     def get_membership
-        @membership_assignments
+        membership_assignments.un_expired.order(created_at: :desc).first.membership
     end
-
+    def get_membership_assignment
+        membership_assignments.un_expired.order(created_at: :desc).first
+    end
+    def has_active_membership?
+        membership_assignments.un_expired(Time.now).present?
+    end
+    def ongoing_rental?
+        rentals.order(created_at: :desc).present? && rentals.order(created_at: :desc).first.is_ongoing?
+    end
+    def current_rental
+        unless rentals.order(created_at: :desc).present?
+            return nil
+        end
+        rentals.order(created_at: :desc).first
+    end
     #(* reference: belows are from the Ruby Training *)#
     def full_name
         [first_name, last_name].join(' ')

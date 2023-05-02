@@ -1,15 +1,5 @@
 <div>
-  <h1 class="font-bold text-4xl">Rental#new</h1>
-  <p>Find me in app/views/rental/new.html.erb</p>
-</div>
-<div>
-  <h2>Begin Rental</h2>
-
-  <%#= form_for(@rental) do |f| %>
-
-    <div class="form-buttons">
-      <%#= f.submit("Begin Rental") %>
-    </div>
+  <h2>Begin Renting Bike <%= @bike.id %></h2>
     <%= button_to 'rent', {:controller => "rentals", :action => "create", :rental=>{:bike_id=>@bike.id, :renter_id=>current_user.id}} %>
-  <%# end %>
+    <button type="button"><%= link_to "Cancel", stations_path %></button>
 </div>

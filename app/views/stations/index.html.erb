@@ -7,7 +7,11 @@
     </div>  
     <div class="flexbox vertical stretch">
       <% if @stations.present? %>
+        <% if user_signed_in? && current_user.ongoing_rental? %>
+        <%= render(partial: "stations/rental_row", collection: @stations, as: :station) %>
+        <% else %>
         <%= render(partial: "stations/row", collection: @stations, as: :station) %>
+        <% end %> 
       <% else %>
       <div class="empty">
         No stations found.
@@ -66,9 +70,10 @@
           school_marker.setMap(map);
         }
       </script>
-      <% api_key = ENV['REACT_APP_API_KEY'] %>
+      <% api_key = ENV['REACT_APP_API_KEY'].to_s %>
+      <% puts api_key %>
       <script src=<%="https://maps.googleapis.com/maps/api/js?key=" + api_key.to_s + "&callback=myMap"%> ></script>
-      =<iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen src=<%="https://maps.googleapis.com/maps/api/js?key=" + api_key.to_s + "&callback=myMap"%>></iframe>
+      <div id="map"> </div>
     </div>
   </div>
 </div>

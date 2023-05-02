@@ -1,10 +1,14 @@
 <td style="">
-  <% if bike %>
-  <%= bike.dock_id %> (<%= bike.identifier %>) <br>
-  <% if user_signed_in? %>
-  <%= link_to "Rent", {action: 'new', controller: 'rentals', id: bike.id} %>
-  <% end %>
-  <% else %>
-  No bike
-  <% end %>
+<% if bike.is_a?(Bike) %>
+<%= bike.dock_id %> (<%= bike.identifier %>) <br>
+<% if user_signed_in?  && !current_user.ongoing_rental?%>
+<%= link_to "Rent", {action: 'new', controller: 'rentals', id: bike.id} %>
+<% end %>
+<% else %>
+<% if user_signed_in?  && current_user.ongoing_rental?%>
+<%= button_to 'Return', {:controller => "rentals", :action => "return", :dock_id=>bike, :station_id => @station.id}, :method=> :patch %>
+<% else %>
+No bike
+<% end %>
+<% end %>
 </td>
