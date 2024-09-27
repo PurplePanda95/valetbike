@@ -14,6 +14,22 @@
     from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
   }
 
+.grid-containerFour {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 5px;
+  background-color: #32CD32;
+  border: 2px solid rgba(0,0,0,0.8);
+  padding: 10px;
+  font-size: 20px;
+}
+
+.grid-containerFour .logoo {
+  width: 600px;
+  height: 450px;
+  background-image: url("ValetBikeLogo.png");
+  background-size: 600px 450px;;
+  }
 .welcome {
   position: absolute;
   bottom: 135px;

@@ -1,6 +1,99 @@
+<style>
+h2 {text-align: center;}
+h3 {text-align: center; }
+</style>
+
 <div class = "hero-image">
-</div>
+</div> 
 <div class ="page-section">
+<% if user_signed_in? %>
+<form action="/customer_portal_sessions" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <button>Manage Billing</button>
+</form>
+<% end %>
+
+
+<% if user_signed_in? && current_user.is_admin? %>
+                <font color="#228B22"> Welcome to ValetBike! </font>
+                <p>Links for developer use (Will delete later)</p>
+                <ul> 
+                    <li><%= link_to "User index page", users_index_path %></li>
+                    <li><%= link_to "User profile/settings", users_show_path %></li>
+                    <li><%= link_to "Rental page", pages_rental_path %></li>
+                    <li><%= link_to "Rental Success Page", pages_success_path %></li>
+
+                </ul>
+            </div>  
+<% end %>
+
+<h1>Happy <span id="day"></span>!</h1>
+<h2>Enjoy your <span id="hour"></span> with <em>Valetbike!</em></h2>
+<br>  </br>
+<h2> <%= link_to "Get Started", new_user_registration_path %> </h2> 
+
+<div class="row">
+<div class="column left">
+
+
+<img src="https://i.postimg.cc/SRTnDMJy/bike.jpg"
+width="600px"
+height="320px"
+onclick="enlargeImg()" id="img1">
+
+<h3>Fun fact:</h3>
+<h3>Hint: Click on me and observe my WHEELS!!! </h3>
+<div style="line-height: 0.25em;">&nbsp;</div>
+<h3>;)</h3>
+<button onclick="resetImg()">Reset</button>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+const period =
+["wonderful morning", "wonderful afternoon", "wonderful evening"];
+
+function time(i) {
+    if ( i < 12 ) { i = 0; }
+    if ( i >= 12 && i < 18 ) { i = 1; }
+    if ( i >= 12 ) { i = 2; }
+    return i
+}
+const d = new Date();
+let whatperiod = time(d.getHours());
+let hour = period[whatperiod];
+document.getElementById("hour").innerHTML = hour;
+</script>
+
+<script>
+const weekday =
+["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const d2 = new Date();
+let day = weekday[d2.getDay()];
+document.getElementById("day").innerHTML = day;
+</script>
+
+<script>
+img = document.getElementById("img1");
+function enlargeImg() {
+    img.style.transform = "scale(1.45)";
+    img.style.transition = "transform 0.25s ease";
+}
+
+function resetImg() {
+    img.style.transform = "scale(1)";
+    img.style.transition = "transform 0.25s ease";
+}
+</script>
 <div class = "welcome">
     <h1> Welcome to ValetBike!</h1>
 </div>
